@@ -1,11 +1,11 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import { ConnectMongoDB } from "./connection.js";
-import { loginAdmin } from "./controllers/admin/auth.js";
-import { checkAuthToken } from "./middlewares/auth.js";
-import { productRoutesAdmin } from "./routes/admin/product.js";
-import seedAdmin from "./seed/seedadmin.js";
+import { ConnectMongoDB } from "../connection.js";
+import { loginAdmin } from "../controllers/admin/auth.js";
+import { checkAuthToken } from "../middlewares/auth.js";
+import { productRoutesAdmin } from "../routes/admin/product.js";
+import seedAdmin from "../seed/seedadmin.js";
 
 const app = express();
 const PORT = 8003;

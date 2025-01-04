@@ -19,8 +19,9 @@ export const loginAdmin = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid Password" });
     }
-
-    const token = generateAuthToken(admin.toObject());
+    const data = admin.toObject();
+    delete data.token;
+    const token = generateAuthToken(data);
     admin.token = token;
 
     await admin.save();

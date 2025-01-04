@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import { adminAuth } from "../models/auth.js";
 const secertKey = "africanBBQ12345@12345";
 export const generateAuthToken = (user = {}) => {
+  console.log(user, "generateAuthToken");
   const token = jwt.sign(user, secertKey);
   return token;
 };

@@ -1,5 +1,5 @@
 import { Product } from "../../models/product.js";
-import fs from "fs";
+import fs from "fs/promises";
 
 export const getProducts = async (req, res) => {
   try {
@@ -40,30 +40,35 @@ export const deleteProductById = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
 export const createProduct = async (req, res) => {
-  const { name, description, price, quantity } = req.body;
-  const image = req.file;
-
-  if (!name || !description || !price || !quantity || !image) {
-    fs.unlink(image.path, (error) => console.log(error));
-    return res.status(400).json({ message: "Validation Error" });
-  }
-
   try {
+    const { name, description, price, quantity } = req.body;
+    const image = req.file.path;
+
     const newProduct = await Product.create({
       name,
       description,
       price,
       quantity,
-      image: image.path,
+      image,
     });
 
-    res.status(201).json({
-      response: newProduct,
-      message: "Product created successfully !",
-    });
+    res
+      .status(201)
+      .json({ message: "Product created successfully!", product: newProduct });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error," });
+    console.error("Error creating product:", err.message);
+
+    // Delete file in case of error
+    if (req.file) {
+      try {
+        await fs.unlink(req.file.path);
+      } catch (error) {
+        console.error("Error deleting uploaded file:", error.message);
+      }
+    }
+
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 };

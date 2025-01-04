@@ -9,10 +9,10 @@ import seedAdmin from "../seed/seedadmin.js";
 
 const app = express();
 const PORT = 8003;
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// // MiddlesWares
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// MiddlesWares
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // Seeder

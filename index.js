@@ -43,6 +43,6 @@ app.get("/api/user/product/:id", getProductById);
 // Admin Routes
 app.use("/api/admin", checkAuthToken, productRoutesAdmin);
 // Client Routes
-app.use("/api/user/orderNow", checkAuthToken, orderRouter);
+app.use("/api/user/order", checkAuthToken, orderRouter);
 
 app.listen(PORT, () => console.log(`Server Running on ${PORT}`));

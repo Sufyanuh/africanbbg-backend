@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { adminAuth } from "../models/auth.js";
+import { adminAuth, userAuth } from "../models/auth.js";
 const secertKey = "africanBBQ12345@12345";
 export const generateAuthToken = (user = {}) => {
   const token = jwt.sign(user, secertKey);
@@ -11,7 +11,7 @@ export const verifyToken = (token, type) => {
     const data =
       type === "admin"
         ? adminAuth.findOne({ token })
-        : adminAuth.findOne({ token });
+        : userAuth.findOne({ token });
     return data;
   } catch (error) {
     console.error(error);

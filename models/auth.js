@@ -14,5 +14,19 @@ const adminSchema = Schema({
   },
   token: { type: String, default: null },
 });
+const userSchema = Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  password: { type: String, required: true },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  token: { type: String, default: null },
+});
 
 export const adminAuth = model("admins", adminSchema);
+export const userAuth = model("users", userSchema);

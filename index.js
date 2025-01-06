@@ -13,10 +13,9 @@ import {
   getAllProducts,
   getProductById,
 } from "./controllers/client/product.js";
+import { orderRouter } from "./routes/client/orders.js";
 const result = env.config();
-if (result.error) {
-  console.error("Failed to load .env file:", result.error);
-}
+
 const app = express();
 const PORT = 8003;
 const __filename = fileURLToPath(import.meta.url);
@@ -42,7 +41,8 @@ app.get("/api/user/products", getAllProducts);
 app.get("/api/user/product/:id", getProductById);
 
 // Admin Routes
-app.use("/api/admin/products", checkAuthToken, productRoutesAdmin);
+app.use("/api/admin", checkAuthToken, productRoutesAdmin);
 // Client Routes
+app.use("/api/user/orderNow", checkAuthToken, orderRouter);
 
 app.listen(PORT, () => console.log(`Server Running on ${PORT}`));

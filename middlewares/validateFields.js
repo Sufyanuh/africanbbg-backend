@@ -9,7 +9,7 @@ export const validateFields =
     // Validate required fields from the model schema
     for (const [key, value] of Object.entries(schema)) {
       if (value.required && !req.body[key]) {
-        errors.push({ field: key, message: `${key} is required` });
+        errors.push({ [key]: `${key} is required` });
       }
     }
 

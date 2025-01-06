@@ -13,9 +13,12 @@ import {
   getAllProducts,
   getProductById,
 } from "./controllers/client/product.js";
-env.config();
+const result = env.config();
+if (result.error) {
+  console.error("Failed to load .env file:", result.error);
+}
 const app = express();
-const PORT = process.env.PORT || 8003;
+const PORT = 8003;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

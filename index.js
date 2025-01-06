@@ -15,7 +15,7 @@ import {
 } from "./controllers/client/product.js";
 env.config();
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 8003;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 

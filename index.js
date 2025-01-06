@@ -38,7 +38,7 @@ ConnectMongoDB();
 app.post("/api/admin/login", loginAdmin);
 app.post("/api/user/login", loginUser);
 app.post("/api/user/register", registerUser);
-app.get("/api/user/product", getAllProducts);
+app.get("/api/user/products", getAllProducts);
 app.get("/api/user/product/:id", getProductById);
 
 // Admin Routes
